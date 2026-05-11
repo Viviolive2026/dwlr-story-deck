@@ -20,6 +20,42 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--navy);font-fam
 .slide{position:absolute;inset:0;display:none;flex-direction:column;padding:clamp(22px,3.8vh,42px) clamp(28px,5vw,56px) clamp(18px,2.8vh,30px);pointer-events:none;overflow:hidden;background:var(--navy);}
 .slide.active{display:flex;pointer-events:all;}
 
+/* PROPRIETARY & CONFIDENTIAL WATERMARK — appears on every slide */
+#deck::before{
+  content:"PROPRIETARY AND CONFIDENTIAL";
+  position:fixed;
+  top:14px;
+  right:18px;
+  font-family:'DM Sans',sans-serif;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:2.5px;
+  color:rgba(239,159,39,0.45);
+  background:rgba(13,27,42,0.5);
+  border:1px solid rgba(239,159,39,0.25);
+  border-radius:4px;
+  padding:3px 8px;
+  z-index:90;
+  pointer-events:none;
+  text-transform:uppercase;
+}
+#deck::after{
+  content:"PROPRIETARY AND CONFIDENTIAL · © 2026 VIVIO LIFE LLC · DO NOT DISTRIBUTE";
+  position:fixed;
+  bottom:6px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:'DM Sans',sans-serif;
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.16);
+  z-index:90;
+  pointer-events:none;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
 /* NAV */
 #nav{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;z-index:100;background:rgba(13,27,42,0.88);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:40px;padding:9px 18px;}
 .nav-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:rgba(75,159,255,0.1);color:var(--accent);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
@@ -182,9 +218,66 @@ body { font-size: 15px; }
 <div id="deck">
 
 <!-- ═══════════════════════════════════════════════════════════
+     COVER — TITLE & PLATFORM OVERVIEW
+═══════════════════════════════════════════════════════════ -->
+<div class="slide active" id="cover" style="background:radial-gradient(ellipse at 25% 40%,rgba(29,158,117,0.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 70%,rgba(75,159,255,0.1) 0%,transparent 55%),var(--navy);justify-content:center;align-items:center;text-align:center;">
+
+  <div style="max-width:920px;width:100%;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(14px,2.4vh,26px);">
+
+    <!-- Brand mark -->
+    <div style="font-family:'DM Serif Display',serif;font-size:clamp(20px,2.6vh,28px);letter-spacing:-0.5px;color:var(--white);">
+      vivio life<span style="color:var(--accent);">.</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:clamp(11px,1.4vh,14px);color:var(--muted);font-weight:300;">community platform</span>
+    </div>
+
+    <!-- Headline -->
+    <div style="font-family:'DM Serif Display',serif;font-size:clamp(34px,6vh,60px);line-height:1.05;color:var(--white);">
+      Find your Vibe.<br>
+      <em style="color:var(--teal-light);font-style:italic;">Find your Tribe.</em>
+    </div>
+
+    <!-- Subtitle -->
+    <div style="font-size:clamp(13px,1.9vh,17px);color:var(--muted);max-width:700px;line-height:1.6;font-weight:300;">
+      The AI-native community engagement platform built exclusively for residential operators — the layer that turns neighbors into community and community into renewals.
+    </div>
+
+    <!-- Two-column value props -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.2vw,24px);max-width:780px;width:100%;margin-top:clamp(4px,1vh,12px);">
+
+      <!-- For Residents -->
+      <div style="background:rgba(75,159,255,0.08);border:1px solid rgba(75,159,255,0.28);border-radius:14px;padding:clamp(14px,2.2vh,22px) clamp(16px,2.5vw,24px);text-align:left;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;color:var(--accent);margin-bottom:8px;">FOR RESIDENTS</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:clamp(15px,2vh,19px);color:var(--white);margin-bottom:8px;line-height:1.3;">A community from day one.</div>
+        <div style="font-size:clamp(11px,1.5vh,13px);color:var(--muted);line-height:1.55;">
+          90-second onboarding to a matched neighbor. Vibe-curated events. A sense of belonging — before the boxes are unpacked.
+        </div>
+      </div>
+
+      <!-- For Operators -->
+      <div style="background:rgba(29,158,117,0.08);border:1px solid rgba(93,202,165,0.28);border-radius:14px;padding:clamp(14px,2.2vh,22px) clamp(16px,2.5vw,24px);text-align:left;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;color:var(--teal-light);margin-bottom:8px;">FOR OPERATORS</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:clamp(15px,2vh,19px);color:var(--white);margin-bottom:8px;line-height:1.3;">An engagement signal you can act on.</div>
+        <div style="font-size:clamp(11px,1.5vh,13px);color:var(--muted);line-height:1.55;">
+          Churn signals 48 days before notice. Automated programming. The social fabric that drives renewals.
+        </div>
+      </div>
+    </div>
+
+    <!-- Confidentiality statement -->
+    <div style="margin-top:clamp(8px,1.6vh,16px);background:rgba(239,159,39,0.05);border:1px solid rgba(239,159,39,0.25);border-radius:8px;padding:clamp(8px,1.5vh,12px) clamp(16px,3vw,28px);max-width:760px;">
+      <div style="font-size:9.5px;font-weight:700;letter-spacing:2.5px;color:var(--amber);text-transform:uppercase;margin-bottom:4px;">Proprietary &amp; Confidential</div>
+      <div style="font-size:10.5px;color:var(--muted);line-height:1.55;">
+        This document and all information herein are the proprietary and confidential property of Vivio Life LLC. Disclosure, reproduction, or distribution without prior written consent is strictly prohibited.<br>© 2026 Vivio Life LLC. All rights reserved.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
      SLIDE 0 — WOW OPENER: PROBLEM + VALUE PROP
 ═══════════════════════════════════════════════════════════ -->
-<div class="slide active" id="s0" style="background:radial-gradient(ellipse at 30% 50%,rgba(232,93,36,0.12) 0%,transparent 55%),radial-gradient(ellipse at 75% 20%,rgba(29,158,117,0.1) 0%,transparent 50%),var(--navy);justify-content:center;align-items:center;text-align:center;">
+<div class="slide" id="s0" style="background:radial-gradient(ellipse at 30% 50%,rgba(232,93,36,0.12) 0%,transparent 55%),radial-gradient(ellipse at 75% 20%,rgba(29,158,117,0.1) 0%,transparent 50%),var(--navy);justify-content:center;align-items:center;text-align:center;">
 
   <div style="max-width:780px;width:100%;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(12px,2.2vh,22px);">
 
@@ -194,13 +287,14 @@ body { font-size: 15px; }
     <!-- Headline -->
     <div style="font-family:'DM Serif Display',serif;font-size:clamp(28px,5.2vh,52px);line-height:1.08;color:var(--white);">
       Up to half your residents leave every year.<br>
-      <em style="color:var(--teal-light);font-style:italic;">Most never had to.</em>
+      <em style="color:var(--teal-light);font-style:italic;">And no one knows until it's too late.</em>
     </div>
 
     <!-- Sub -->
-    <div style="font-size:clamp(13px,1.9vh,17px);color:var(--muted);max-width:520px;line-height:1.65;font-weight:300;">
+    <div style="font-size:clamp(13px,1.9vh,17px);color:var(--muted);max-width:560px;line-height:1.65;font-weight:300;">
       Not because of rent. Not because of the unit.<br>
-      Because they never felt at home — and no one knew until it was too late.
+      Because they never felt at home — and no one knew until it was too late.<br>
+      <span style="color:var(--teal-light);font-weight:400;">Vivio Life is the reason they stay and renew.</span>
     </div>
 
     <!-- 3 stats -->
@@ -211,26 +305,26 @@ body { font-size: 15px; }
       </div>
       <div style="width:1px;height:48px;background:var(--border);"></div>
       <div style="text-align:center;">
-        <div style="font-family:'DM Serif Display',serif;font-size:clamp(26px,4.5vh,42px);color:var(--amber);line-height:1;">$4,200</div>
-        <div style="font-size:clamp(10px,1.3vh,12px);color:var(--muted);margin-top:4px;">cost per resident who leaves</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3.8vh,32px);color:var(--amber);line-height:1.1;">Material</div>
+        <div style="font-size:clamp(10px,1.3vh,12px);color:var(--muted);margin-top:4px;">cost per resident lost</div>
       </div>
       <div style="width:1px;height:48px;background:var(--border);"></div>
       <div style="text-align:center;">
-        <div style="font-family:'DM Serif Display',serif;font-size:clamp(26px,4.5vh,42px);color:var(--teal-light);line-height:1;">4.4×</div>
-        <div style="font-size:clamp(10px,1.3vh,12px);color:var(--muted);margin-top:4px;">ROI on first 5 saved renewals</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3.8vh,32px);color:var(--teal-light);line-height:1.1;">Measurable<br>ROI</div>
+        <div style="font-size:clamp(10px,1.3vh,12px);color:var(--muted);margin-top:4px;">on saved renewals</div>
       </div>
     </div>
 
     <!-- Value prop -->
-    <div style="background:linear-gradient(135deg,rgba(29,158,117,0.14),rgba(75,159,255,0.07));border:1px solid rgba(93,202,165,0.32);border-radius:14px;padding:clamp(14px,2.2vh,22px) clamp(22px,3.5vw,44px);max-width:600px;width:100%;">
-      <div style="font-family:'DM Serif Display',serif;font-size:clamp(15px,2.4vh,22px);color:var(--white);line-height:1.3;margin-bottom:8px;">
-        <strong style="color:var(--teal-light);">Vivio Life</strong> turns move-in day into belonging —<br>and belonging into renewals.
+    <div style="background:linear-gradient(135deg,rgba(29,158,117,0.14),rgba(75,159,255,0.07));border:1px solid rgba(93,202,165,0.32);border-radius:14px;padding:clamp(14px,2.2vh,22px) clamp(22px,3.5vw,44px);max-width:680px;width:100%;">
+      <div style="font-family:'DM Serif Display',serif;font-size:clamp(16px,2.6vh,22px);color:var(--white);line-height:1.3;margin-bottom:14px;text-align:center;">
+        <span style="color:var(--teal-light);">Vivio Life</span> is the reason they stay — and renew.
       </div>
-      <div style="display:flex;justify-content:center;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;margin-top:4px;">
+      <div style="display:flex;justify-content:center;gap:clamp(12px,2.5vw,28px);flex-wrap:wrap;">
         <span style="font-size:clamp(11px,1.5vh,13px);color:var(--muted);">🤖 Runs autonomously — minimal staff time</span>
         <span style="font-size:clamp(11px,1.5vh,13px);color:var(--muted);">🤝 AI-matched neighbors from day one</span>
         <span style="font-size:clamp(11px,1.5vh,13px);color:var(--muted);">📊 Churn signals 48 days early</span>
-        <span style="font-size:clamp(11px,1.5vh,13px);color:var(--muted);">🔗 Sits alongside your PMS — no integration</span>
+        <span style="font-size:clamp(11px,1.5vh,13px);color:var(--muted);">🔗 PMS integration as needed</span>
       </div>
     </div>
 
@@ -246,7 +340,7 @@ body { font-size: 15px; }
 <div class="slide" id="s1" style="background:radial-gradient(ellipse at 15% 50%,rgba(232,93,36,0.1) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(29,158,117,0.08) 0%,transparent 50%),var(--navy);">
 
   <div class="part-badge badge-hook" style="margin-bottom:6px;">The Financial Case</div>
-  <div class="slide-title">The numbers that matter<br><span style="color:var(--teal-light);">to your ownership group.</span></div>
+  <div class="slide-title">Time to value —<br><span style="color:var(--teal-light);">measured in renewals.</span></div>
   <div class="slide-sub" style="margin-bottom:10px;">Co-living churn isn't a management failure. It's structural — and it's costing you more than you realize.</div>
 
   <!-- Main content: 3 columns -->
@@ -256,22 +350,45 @@ body { font-size: 15px; }
     <div style="padding:0 18px 0 0;display:flex;flex-direction:column;gap:10px;">
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--coral);margin-bottom:2px;">THE COST OF INACTION</div>
 
+      <!-- Annual churn rate -->
       <div style="background:rgba(232,93,36,0.08);border:1px solid rgba(232,93,36,0.25);border-radius:12px;padding:14px 16px;">
         <div style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--coral);line-height:1;">35–48%</div>
         <div style="font-size:11px;color:var(--muted);margin-top:3px;">annual co-living turnover rate</div>
         <div style="font-size:10px;color:rgba(232,93,36,0.6);margin-top:5px;font-style:italic;">Co-Living Market Report 2025</div>
       </div>
 
+      <!-- Per-unit cost with transparent composite math -->
       <div style="background:rgba(232,93,36,0.06);border:1px solid rgba(232,93,36,0.18);border-radius:12px;padding:14px 16px;">
-        <div style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--amber);line-height:1;">$4,200</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px;">cost per resident who leaves</div>
-        <div style="font-size:10px;color:rgba(239,159,39,0.6);margin-top:5px;font-style:italic;">Lost rent + make-ready + re-leasing</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:34px;color:var(--amber);line-height:1.1;">~$4,200</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">per resident lost · composite estimate</div>
+
+        <!-- Math breakdown -->
+        <div style="background:rgba(239,159,39,0.05);border:1px solid rgba(239,159,39,0.15);border-radius:6px;padding:7px 10px;margin-top:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);line-height:1.7;">
+            <span>Vacancy loss (30–45 days)</span>
+            <span style="color:var(--text);">~$2,000–$2,900</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);line-height:1.7;">
+            <span>Make-ready / turn cost</span>
+            <span style="color:var(--text);">~$800–$1,500</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);line-height:1.7;">
+            <span>Re-leasing &amp; marketing</span>
+            <span style="color:var(--text);">~$700–$1,100</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--amber);line-height:1.7;font-weight:600;margin-top:3px;padding-top:3px;border-top:1px solid rgba(239,159,39,0.2);">
+            <span>Total range</span>
+            <span>$3,500–$5,500</span>
+          </div>
+        </div>
+        <div style="font-size:9px;color:rgba(239,159,39,0.55);margin-top:5px;font-style:italic;line-height:1.4;">Synthesized from RealPage turnover data, NAA operating-expense surveys, and Co-Living Market Report 2025.</div>
       </div>
 
+      <!-- Annual NOI drag with dollar figure -->
       <div style="background:rgba(232,93,36,0.06);border:1px solid rgba(232,93,36,0.15);border-radius:12px;padding:14px 16px;">
-        <div style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--text);line-height:1;">$84K</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px;">annual NOI drag — 50-unit building</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:5px;font-style:italic;">20 units × 40% churn × $4,200</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--coral);line-height:1.1;">$300K–$400K+</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">annual NOI drag · 200-unit portfolio</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:5px;font-style:italic;">~80–95 turnovers/year × $4,200</div>
       </div>
     </div>
 
@@ -280,7 +397,7 @@ body { font-size: 15px; }
 
     <!-- Col 2: The Chain -->
     <div style="padding:0 18px;display:flex;flex-direction:column;justify-content:center;gap:0;">
-      <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:14px;">WHY IT KEEPS HAPPENING</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--coral);margin-bottom:14px;">THE CHURN PROBLEM</div>
 
       <div style="display:flex;flex-direction:column;gap:0;">
         <!-- Step 1 -->
@@ -314,7 +431,7 @@ body { font-size: 15px; }
         <div style="display:flex;gap:12px;align-items:flex-start;">
           <div style="width:28px;height:28px;border-radius:50%;background:rgba(232,93,36,0.2);border:1px solid rgba(232,93,36,0.5);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px;">💸</div>
           <div>
-            <div style="font-size:12px;font-weight:600;color:var(--coral);margin-bottom:2px;">$4,200 per unit. Repeat.</div>
+            <div style="font-size:12px;font-weight:600;color:var(--coral);margin-bottom:2px;">Real cost. Repeat.</div>
             <div style="font-size:11px;color:var(--muted);line-height:1.5;">Make-ready, vacancy, re-leasing costs. Every quarter, every building.</div>
           </div>
         </div>
@@ -328,42 +445,60 @@ body { font-size: 15px; }
     <div style="padding:0 0 0 18px;display:flex;flex-direction:column;gap:10px;">
       <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--teal-light);margin-bottom:2px;">WITH VIVIO LIFE</div>
 
-      <!-- Renewal lift -->
-      <div style="background:rgba(29,158,117,0.1);border:1px solid rgba(93,202,165,0.3);border-radius:12px;padding:14px 16px;">
-        <div style="display:flex;align-items:baseline;gap:8px;">
-          <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--muted);line-height:1;text-decoration:line-through;">18%</div>
-          <div style="font-size:13px;color:var(--muted);">→</div>
-          <div style="font-family:'DM Serif Display',serif;font-size:34px;color:var(--teal-light);line-height:1;">43%</div>
+      <!-- Renewal lift: ceiling vs conservative floor -->
+      <div style="background:rgba(29,158,117,0.1);border:1px solid rgba(93,202,165,0.3);border-radius:12px;padding:13px 14px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--teal-light);margin-bottom:9px;">RENEWAL LIFT POTENTIAL</div>
+
+        <!-- Two side-by-side stats -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+
+          <!-- CEILING -->
+          <div style="background:rgba(29,158,117,0.05);border:1px solid rgba(93,202,165,0.18);border-radius:8px;padding:9px 10px;text-align:center;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:1px;color:var(--teal-light);margin-bottom:4px;">CEILING</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:24px;color:var(--teal-light);line-height:1;">+25</div>
+            <div style="font-size:9px;color:rgba(93,202,165,0.7);margin-top:2px;font-weight:600;letter-spacing:0.5px;">PERCENTAGE POINTS</div>
+            <div style="font-size:9.5px;color:var(--muted);margin-top:5px;line-height:1.35;">fully-engaged residents · 18% → 43%</div>
+          </div>
+
+          <!-- CONSERVATIVE FLOOR -->
+          <div style="background:rgba(29,158,117,0.12);border:1.5px solid rgba(93,202,165,0.4);border-radius:8px;padding:9px 10px;text-align:center;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:1px;color:var(--white);margin-bottom:4px;">CONSERVATIVE FLOOR</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:24px;color:var(--white);line-height:1;">+5</div>
+            <div style="font-size:9px;color:rgba(255,255,255,0.7);margin-top:2px;font-weight:600;letter-spacing:0.5px;">PERCENTAGE POINTS</div>
+            <div style="font-size:9.5px;color:var(--muted);margin-top:5px;line-height:1.35;">building-wide at typical adoption</div>
+          </div>
+
         </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;">renewal rate — residents with community vs without</div>
+
+        <div style="font-size:10px;color:rgba(93,202,165,0.65);margin-top:9px;padding-top:7px;border-top:1px solid rgba(93,202,165,0.15);text-align:center;font-style:italic;">The math below is built on the floor — not the ceiling.</div>
       </div>
 
-      <!-- Cost vs save -->
+      <!-- Do the math - single conservative scenario -->
       <div style="background:rgba(29,158,117,0.07);border:1px solid rgba(93,202,165,0.2);border-radius:12px;padding:14px 16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <div style="font-size:11px;color:var(--muted);">Vivio Life annual cost</div>
-          <div style="font-size:14px;font-weight:700;color:var(--text);">$4,800</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--teal-light);margin-bottom:10px;">DO THE MATH — PER 200 UNITS</div>
+
+        <!-- Hero stat -->
+        <div style="text-align:center;padding:4px 0;">
+          <div style="font-family:'DM Serif Display',serif;font-size:42px;color:var(--teal-light);line-height:1;">~$42K</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:5px;">NOI recovered annually</div>
         </div>
-        <div style="height:1px;background:var(--border);margin-bottom:8px;"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <div style="font-size:11px;color:var(--muted);">Turnover cost avoided (5 units)</div>
-          <div style="font-size:14px;font-weight:700;color:var(--teal-light);">$21,000</div>
+
+        <!-- Math explanation -->
+        <div style="background:rgba(29,158,117,0.06);border:1px solid rgba(93,202,165,0.15);border-radius:8px;padding:10px 12px;margin-top:10px;text-align:center;">
+          <div style="font-size:12px;color:var(--text);margin-bottom:3px;">5 percentage point reduction in churn</div>
+          <div style="font-size:10.5px;color:rgba(93,202,165,0.75);font-style:italic;font-weight:600;">Conservative estimate</div>
         </div>
-        <div style="height:1px;background:rgba(93,202,165,0.2);margin-bottom:8px;"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-size:11px;font-weight:600;color:var(--white);">Net gain</div>
-          <div style="font-size:16px;font-weight:700;color:var(--teal-light);">+$16,200</div>
-        </div>
+
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;padding-top:7px;border-top:1px solid rgba(93,202,165,0.15);font-style:italic;text-align:center;">10 saved leases × $4,200 each</div>
       </div>
 
-      <!-- ROI badge -->
-      <div style="background:linear-gradient(135deg,rgba(29,158,117,0.2),rgba(75,159,255,0.1));border:1px solid rgba(93,202,165,0.4);border-radius:12px;padding:14px 16px;text-align:center;">
-        <div style="font-family:'DM Serif Display',serif;font-size:44px;color:var(--teal-light);line-height:1;">4.4×</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;">ROI on platform cost</div>
-        <div style="font-size:10px;color:rgba(93,202,165,0.5);margin-top:3px;font-style:italic;">on first 5 saved renewals alone</div>
+      <!-- Payback callout -->
+      <div style="background:linear-gradient(135deg,rgba(29,158,117,0.2),rgba(75,159,255,0.1));border:1px solid rgba(93,202,165,0.4);border-radius:12px;padding:12px 16px;text-align:center;">
+        <div style="font-family:'DM Serif Display',serif;font-size:17px;color:var(--white);line-height:1.25;">Payback inside the first cohort of saved renewals.</div>
+        <div style="font-size:10px;color:rgba(93,202,165,0.75);margin-top:6px;font-style:italic;">Platform pricing scoped to your portfolio · run the ROI against your churn baseline.</div>
       </div>
 
-      <div style="font-size:9.5px;color:rgba(255,255,255,0.22);line-height:1.5;margin-top:2px;">Sources: Co-Living Market Report 2025 · Coliving.com 2025 · Savills 2025 · RealPage. 10-pt retention lift is modeled — not yet Vivio-measured data.</div>
+      <div style="font-size:9.5px;color:rgba(255,255,255,0.22);line-height:1.5;margin-top:2px;">Sources: Co-Living Market Report 2025 · Coliving.com 2025 · Savills 2025 · RealPage. Per-unit turnover cost and renewal lift are industry-modeled — not yet Vivio-measured data.</div>
     </div>
 
   </div>
@@ -375,8 +510,25 @@ body { font-size: 15px; }
 <div class="slide" id="s2" style="background:#07091A;display:none;justify-content:flex-start!important;padding-top:18px!important;padding-bottom:85px!important;">
 
   <div class="part-badge badge-hook" style="margin-bottom:4px;">The Competitive Landscape</div>
-  <div class="slide-title" style="font-size:clamp(20px,2.8vh,28px)!important;margin-bottom:5px;">Tenant engagement is crowded.<br><span style="color:var(--teal-light);">Nobody has solved this part.</span></div>
-  <div class="slide-sub" style="margin-bottom:6px;font-size:clamp(12px,1.6vh,14px)!important;">The tools operators use today solve real problems — just not the one that drives renewals. Here's where every player sits, and where Vivio Life plugs in.</div>
+  <div class="slide-title" style="font-size:clamp(20px,2.8vh,28px)!important;margin-bottom:8px;">The AI-Native Resident-to-Resident<br><span style="color:var(--teal-light);">Engagement Platform that…</span></div>
+
+  <!-- Tom's 4 value-prop bullets (blue → green progression) -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;">
+    <div style="background:rgba(75,159,255,0.08);border:1px solid rgba(75,159,255,0.3);border-radius:10px;padding:8px 12px;">
+      <div style="font-size:12.5px;color:var(--accent);font-weight:600;">Engages tenants by Vibe Type</div>
+    </div>
+    <div style="background:rgba(75,159,255,0.08);border:1px solid rgba(75,159,255,0.3);border-radius:10px;padding:8px 12px;">
+      <div style="font-size:12.5px;color:var(--accent);font-weight:600;">Curates connections &amp; events by Vibe</div>
+    </div>
+    <div style="background:rgba(29,158,117,0.1);border:1.5px solid rgba(93,202,165,0.45);border-radius:10px;padding:8px 12px;">
+      <div style="font-size:12.5px;color:var(--teal-light);font-weight:600;">Auto-calculates engagement score — <span style="color:var(--white);">measurable, daily</span></div>
+    </div>
+    <div style="background:rgba(29,158,117,0.1);border:1px solid rgba(93,202,165,0.35);border-radius:10px;padding:8px 12px;">
+      <div style="font-size:12.5px;color:var(--teal-light);font-weight:600;">Delivers churn signals to operators</div>
+    </div>
+  </div>
+
+  <div class="slide-sub" style="margin-bottom:6px;font-size:clamp(11px,1.5vh,13px)!important;color:var(--muted);">Tenant engagement is crowded — but nobody has solved this part. Here's where every player sits, and where Vivio Life plugs in.</div>
 
   <!-- Stack map -->
   <div style="display:flex;gap:8px;flex:1;align-items:stretch;margin-top:2px;min-height:0;">
@@ -451,12 +603,12 @@ body { font-size: 15px; }
         <div style="font-size:12px;color:var(--muted);line-height:1.5;">Builds the social fabric of the building. Resident-to-resident connections, community events, engagement scoring — and churn signals before you'd otherwise know.</div>
         <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px;">
           <div style="font-size:12.5px;color:var(--teal-light);">✓ Runs autonomously — no daily staff time</div>
-          <div style="font-size:12.5px;color:var(--teal-light);">✓ Sits alongside your PMS — no integration needed</div>
+          <div style="font-size:12.5px;color:var(--teal-light);">✓ PMS integration as needed</div>
           <div style="font-size:12.5px;color:var(--teal-light);">✓ Churn signal 48 days before notice is given</div>
           <div style="font-size:12.5px;color:var(--teal-light);">✓ Additive to rewards programs like Pinata</div>
         </div>
         <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(93,202,165,0.2);">
-          <div style="font-size:11px;color:rgba(93,202,165,0.85);font-weight:600;">This is the gap that costs $84K/year in a 50-unit building</div>
+          <div style="font-size:11px;color:rgba(93,202,165,0.85);font-weight:600;">This is the gap driving most of your annual NOI drag</div>
         </div>
       </div>
     </div>
@@ -484,30 +636,25 @@ body { font-size: 15px; }
   <div class="ux-row" style="display:flex;gap:16px;align-items:center;margin-top:4px;">
 
     <!-- LEFT DESCRIPTOR PANEL -->
-    <div style="width:195px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;justify-content:center;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:4px;">WHAT YOUR RESIDENT SEES</div>
+    <div style="width:160px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:4px;">RESIDENT EXPERIENCE</div>
 
-      <!-- Step descriptors -->
-      <div style="background:rgba(75,159,255,0.08);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:3px;">① QR Scan</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Card in move-in packet. One scan — no app store, no password, no form. Building name pre-fills.</div>
-      </div>
-      <div style="background:rgba(175,169,236,0.08);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:9px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--purple);margin-bottom:3px;">② Vibe Profile</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Energy type + 8 interest tags. Takes 45 seconds. Powers every match, nudge, and event recommendation.</div>
-      </div>
-      <div style="background:rgba(239,159,39,0.08);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--amber);margin-bottom:3px;">③ Community Pledge</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Public micro-commitment. "I'll show up to what I RSVP." The mechanic that cuts no-shows significantly.</div>
-      </div>
-      <div style="background:rgba(29,158,117,0.1);border-left:3px solid var(--teal-light);border-radius:0 8px 8px 0;padding:9px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--teal-light);margin-bottom:3px;">④ Match Reveal</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">94% compatible neighbor — same floor, same vibe, same availability. First connection before she finishes unpacking.</div>
+      <!-- Compact summary block -->
+      <div style="background:rgba(75,159,255,0.06);border:1px solid rgba(75,159,255,0.2);border-radius:8px;padding:11px 13px;">
+        <div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px;line-height:1.25;">90 seconds<br>to first match.</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;margin-bottom:8px;">From move-in packet to matched neighbor — entirely on their phone.</div>
+        <div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--border);padding-top:7px;">
+          <div style="font-size:11px;color:var(--accent);font-weight:600;">① QR scan</div>
+          <div style="font-size:11px;color:var(--purple);font-weight:600;">② Vibe profile</div>
+          <div style="font-size:11px;color:var(--amber);font-weight:600;">③ Community pledge</div>
+          <div style="font-size:11px;color:var(--teal-light);font-weight:600;">④ Match reveal</div>
+        </div>
       </div>
 
-      <!-- Zero friction note -->
-      <div style="margin-top:4px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:8px 11px;">
-        <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">⚡ <strong style="color:var(--white);">Zero IT setup.</strong> QR cards ship ready. No system integration required.</div>
+      <!-- Zero IT + existing residents note -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:7px;padding:8px 10px;">
+        <div style="font-size:10.5px;color:var(--muted);line-height:1.5;margin-bottom:3px;">⚡ <strong style="color:var(--white);">New residents:</strong> QR card in move-in packet</div>
+        <div style="font-size:10.5px;color:var(--muted);line-height:1.5;">📲 <strong style="color:var(--white);">Existing residents:</strong> one-time SMS/email invite</div>
       </div>
     </div>
 
@@ -515,23 +662,23 @@ body { font-size: 15px; }
     <div style="flex:1;display:flex;gap:10px;align-items:center;justify-content:center;min-width:0;">
 
       <!-- PHONE 1: Welcome/QR screen -->
-      <div style="width:155px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:10px;border:2px solid rgba(255,255,255,0.1);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
+      <div style="width:210px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:12px;border:2px solid rgba(255,255,255,0.1);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
         <div style="width:40px;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;margin:0 auto 10px;"></div>
         <!-- App header -->
         <div style="text-align:center;margin-bottom:10px;">
-          <div style="font-size:13px;font-weight:800;color:#fff;letter-spacing:-0.5px;">vivio life</div>
-          <div style="font-size:8.5px;color:rgba(255,255,255,0.4);margin-top:1px;">Welcome to The Vue on 45th</div>
+          <div style="font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.5px;">vivio life</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:1px;">Welcome aboard</div>
         </div>
         <!-- QR visual -->
         <div style="background:rgba(75,159,255,0.08);border:1px solid rgba(75,159,255,0.2);border-radius:10px;padding:10px;text-align:center;margin-bottom:8px;">
-          <div style="font-size:26px;margin-bottom:4px;">⬛</div>
-          <div style="font-size:8px;color:rgba(75,159,255,0.8);font-weight:600;">SCANNED ✓</div>
+          <div style="font-size:32px;margin-bottom:4px;">⬛</div>
+          <div style="font-size:9.5px;color:rgba(75,159,255,0.8);font-weight:600;">SCANNED ✓</div>
         </div>
         <!-- Building info -->
         <div style="background:rgba(29,158,117,0.1);border:1px solid rgba(93,202,165,0.25);border-radius:8px;padding:8px 10px;margin-bottom:8px;">
-          <div style="font-size:9px;color:rgba(93,202,165,0.8);font-weight:600;margin-bottom:3px;">🏢 The Vue on 45th</div>
-          <div style="font-size:8.5px;color:rgba(255,255,255,0.5);">Seattle, WA · Unit 4D</div>
-          <div style="font-size:8.5px;color:rgba(93,202,165,0.7);margin-top:3px;">👥 14 neighbors already inside</div>
+          <div style="font-size:10.5px;color:rgba(93,202,165,0.8);font-weight:600;margin-bottom:3px;">🏢 Your building</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.5);">Unit 4D</div>
+          <div style="font-size:10px;color:rgba(93,202,165,0.7);margin-top:3px;">👥 14 neighbors already inside</div>
         </div>
         <!-- Avatars row -->
         <div style="display:flex;gap:-2px;margin-bottom:8px;justify-content:center;">
@@ -541,16 +688,16 @@ body { font-size: 15px; }
           <div style="width:20px;height:20px;border-radius:50%;background:#D97706;border:1.5px solid #0d111e;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;">S</div>
           <div style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.12);border:1.5px solid #0d111e;display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,0.5);">+10</div>
         </div>
-        <div style="background:linear-gradient(135deg,#2352F5,#1d9e75);border-radius:8px;padding:8px;text-align:center;">
-          <div style="font-size:9px;font-weight:700;color:#fff;">Join the community →</div>
+        <div style="background:linear-gradient(135deg,#2352F5,#1d9e75);border-radius:8px;padding:9px;text-align:center;">
+          <div style="font-size:10.5px;font-weight:700;color:#fff;">Join the community →</div>
         </div>
       </div>
 
       <!-- PHONE 2: Vibe + Pledge -->
-      <div style="width:155px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:10px;border:2px solid rgba(175,169,236,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
+      <div style="width:210px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:12px;border:2px solid rgba(175,169,236,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
         <div style="width:40px;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;margin:0 auto 10px;"></div>
-        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:2px;">Your vibe ✦</div>
-        <div style="font-size:8px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Step 2 of 4 — takes 45 seconds</div>
+        <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:2px;">Your vibe ✦</div>
+        <div style="font-size:9.5px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Step 2 of 4 — takes 45 seconds</div>
         <!-- Energy type -->
         <div style="margin-bottom:8px;">
           <div style="font-size:8.5px;color:rgba(175,169,236,0.8);font-weight:600;margin-bottom:4px;">Energy type</div>
@@ -580,20 +727,20 @@ body { font-size: 15px; }
             <div style="font-size:7.5px;color:rgba(255,255,255,0.7);">☑ I'll respect quiet hours</div>
           </div>
         </div>
-        <div style="background:linear-gradient(135deg,rgba(175,169,236,0.3),rgba(75,159,255,0.2));border-radius:8px;padding:7px;text-align:center;">
-          <div style="font-size:9px;font-weight:700;color:#fff;">Show my match →</div>
+        <div style="background:linear-gradient(135deg,rgba(175,169,236,0.3),rgba(75,159,255,0.2));border-radius:8px;padding:9px;text-align:center;">
+          <div style="font-size:10.5px;font-weight:700;color:#fff;">Show my match →</div>
         </div>
       </div>
 
       <!-- PHONE 3: Match Reveal -->
-      <div style="width:155px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:10px;border:2px solid rgba(93,202,165,0.35);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
+      <div style="width:210px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:12px;border:2px solid rgba(93,202,165,0.35);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
         <div style="width:40px;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;margin:0 auto 10px;"></div>
-        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:1px;">Your match ✦</div>
-        <div style="font-size:8px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Based on vibe + availability</div>
+        <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:1px;">Your match ✦</div>
+        <div style="font-size:9.5px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Based on vibe + availability</div>
         <!-- Match score ring -->
         <div style="text-align:center;margin-bottom:8px;">
-          <div style="width:56px;height:56px;border-radius:50%;border:3px solid rgba(93,202,165,0.5);background:rgba(29,158,117,0.12);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 4px;">
-            <div style="font-size:16px;font-weight:800;color:#5dcaa5;line-height:1;">94%</div>
+          <div style="width:66px;height:66px;border-radius:50%;border:3px solid rgba(93,202,165,0.5);background:rgba(29,158,117,0.12);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 4px;">
+            <div style="font-size:19px;font-weight:800;color:#5dcaa5;line-height:1;">94%</div>
             <div style="font-size:6px;color:rgba(93,202,165,0.6);">compatible</div>
           </div>
         </div>
@@ -602,8 +749,8 @@ body { font-size: 15px; }
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
             <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2352F5,#7C3AED);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;">J</div>
             <div>
-              <div style="font-size:10px;font-weight:700;color:#fff;">Jordan Park</div>
-              <div style="font-size:8px;color:rgba(255,255,255,0.4);">Unit 4C · Ambivert</div>
+              <div style="font-size:11.5px;font-weight:700;color:#fff;">Jordan Park</div>
+              <div style="font-size:9.5px;color:rgba(255,255,255,0.4);">Unit 4C · Ambivert</div>
             </div>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:3px;">
@@ -618,51 +765,37 @@ body { font-size: 15px; }
           <div style="font-size:7.5px;color:rgba(93,202,165,0.7);">✓ Overlapping interests</div>
           <div style="font-size:7.5px;color:rgba(93,202,165,0.7);">✓ Matching availability</div>
         </div>
-        <div style="background:linear-gradient(135deg,#1d9e75,#2352F5);border-radius:8px;padding:7px;text-align:center;">
-          <div style="font-size:9px;font-weight:700;color:#fff;">👋 Say hey to Jordan</div>
+        <div style="background:linear-gradient(135deg,#1d9e75,#2352F5);border-radius:8px;padding:9px;text-align:center;">
+          <div style="font-size:10.5px;font-weight:700;color:#fff;">👋 Say hey to Jordan</div>
         </div>
       </div>
 
     </div>
 
     <!-- RIGHT DESCRIPTOR PANEL -->
-    <div style="width:215px;flex-shrink:0;display:flex;flex-direction:column;gap:6px;justify-content:center;">
-      <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:2px;">WHAT THE CM SEES</div>
+    <div style="width:160px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:4px;">OPERATOR VIEW</div>
 
-      <div style="background:rgba(29,158,117,0.08);border:1px solid rgba(93,202,165,0.2);border-radius:8px;padding:7px 12px;">
-        <div style="font-size:13px;font-weight:700;color:var(--teal-light);margin-bottom:3px;">Immediately after opt-in</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.5;">Onboarding rate ticks up. Engagement Score updates. Resident joins the matching pool.</div>
-        <div style="font-size:11.5px;color:rgba(93,202,165,0.65);margin-top:4px;font-weight:600;">Cohort-level only. No individual data.</div>
-      </div>
-
-      <div style="background:rgba(232,93,36,0.06);border:1px solid rgba(232,93,36,0.18);border-radius:8px;padding:7px 12px;">
-        <div style="font-size:13px;font-weight:700;color:var(--coral);margin-bottom:3px;">Never sees ✕</div>
+      <!-- What operator sees -->
+      <div style="background:rgba(29,158,117,0.08);border:1px solid rgba(93,202,165,0.22);border-radius:8px;padding:10px 12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--teal-light);margin-bottom:5px;">What you see ✓</div>
         <div style="display:flex;flex-direction:column;gap:3px;">
-          <div style="font-size:12px;color:var(--muted);">✕ Individual pledge responses</div>
-          <div style="font-size:12px;color:var(--muted);">✕ Vibe tags tied to names</div>
-          <div style="font-size:12px;color:var(--muted);">✕ Match pairings or messages</div>
-          <div style="font-size:12px;color:var(--muted);">✕ Any private resident data</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.4;">✓ Cohort engagement metrics</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.4;">✓ Anonymous feedback themes</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.4;">✓ Churn signal at day 12</div>
         </div>
+        <div style="font-size:10px;color:rgba(93,202,165,0.7);margin-top:6px;padding-top:5px;border-top:1px solid rgba(93,202,165,0.15);font-weight:600;">PMS integration as needed</div>
       </div>
 
-      <div style="background:rgba(75,159,255,0.07);border:1px solid rgba(75,159,255,0.18);border-radius:8px;padding:7px 12px;">
-        <div style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:3px;">As engagement builds ✓</div>
+      <!-- Private to resident -->
+      <div style="background:rgba(232,93,36,0.05);border:1px solid rgba(232,93,36,0.18);border-radius:8px;padding:10px 12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--coral);margin-bottom:5px;">Private to resident ✕</div>
         <div style="display:flex;flex-direction:column;gap:3px;">
-          <div style="font-size:12px;color:var(--muted);">✓ Event RSVP vs attendance rates</div>
-          <div style="font-size:12px;color:var(--muted);">✓ New peer connections / week</div>
-          <div style="font-size:12px;color:var(--muted);">✓ Vibe Score trend (building-wide)</div>
-          <div style="font-size:12px;color:var(--muted);">✓ Anonymous feedback themes</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.4;">✕ Names &amp; profiles</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.4;">✕ Match pairings</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.4;">✕ Direct messages</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.4;">✕ Vibe tags by person</div>
         </div>
-      </div>
-
-      <div style="background:rgba(239,159,39,0.08);border:1px solid rgba(239,159,39,0.25);border-radius:8px;padding:7px 12px;">
-        <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:3px;">Churn signal fires ⚠</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.5;">Unit + days quiet + lease date. No name. No reason. Just enough to act — 48 days early.</div>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:7px;padding:7px 12px;text-align:center;">
-        <div style="font-size:11.5px;font-weight:700;color:rgba(93,202,165,0.7);margin-bottom:3px;">NO PMS INTEGRATION</div>
-        <div style="font-size:11.5px;color:var(--muted);">Runs alongside your existing system. Zero setup.</div>
       </div>
     </div>
 
@@ -675,33 +808,33 @@ body { font-size: 15px; }
 <div class="slide" id="s4">
 
   <div class="part-badge badge-resident" style="margin-bottom:6px;">Resident Experience · Engagement</div>
-  <div class="slide-title">The building becomes<br>the venue. Automatically.</div>
+  <div class="slide-title">Your building becomes synonymous<br><span style="color:var(--teal-light);">with where residents find their Vibe — and their Tribe.</span></div>
   <div class="slide-sub" style="margin-bottom:8px;">Two event streams. Smart nudges when life gets busy. The engagement loop that turns neighbors into community — and community into renewals.</div>
 
   <div class="ux-row" style="display:flex;gap:16px;align-items:center;margin-top:4px;">
 
     <!-- LEFT DESCRIPTOR -->
-    <div style="width:190px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+    <div style="width:165px;flex-shrink:0;display:flex;flex-direction:column;gap:7px;justify-content:center;">
       <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:2px;">HOW THE LOOP WORKS</div>
 
-      <div style="background:rgba(75,159,255,0.08);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:3px;">Resident-created events</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Jordan posts a study session. The platform surfaces it to Study-tagged residents. Three RSVP. No flyer. Zero staff time.</div>
+      <div style="background:rgba(75,159,255,0.08);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:8px 11px;">
+        <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:2px;">Resident-created events</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.45;">Auto-surface to tagged residents. No flyer. Zero staff time.</div>
       </div>
 
-      <div style="background:rgba(175,169,236,0.08);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:9px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--purple);margin-bottom:3px;">Operator-seeded anchors</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">You post one event. The AI handles targeting, RSVP tracking, reminder nudges, and post-event feedback. Automatically.</div>
+      <div style="background:rgba(175,169,236,0.08);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:8px 11px;">
+        <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:2px;">Operator-seeded anchors</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.45;">Post once. AI does targeting + reminders + feedback.</div>
       </div>
 
-      <div style="background:rgba(239,159,39,0.08);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:9px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--amber);margin-bottom:3px;">Smart nudges</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">9 days quiet → personalized nudge fires. Contextual, not generic. Re-engages before disengagement becomes churn.</div>
+      <div style="background:rgba(239,159,39,0.08);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:8px 11px;">
+        <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:2px;">Smart nudges</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.45;">9 days quiet → personal nudge. Re-engage before churn.</div>
       </div>
 
-      <div style="background:rgba(29,158,117,0.08);border-left:3px solid var(--teal-light);border-radius:0 8px 8px 0;padding:9px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--teal-light);margin-bottom:3px;">Pledge reduces no-shows</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Public "I'll bring snacks" commitment. Events actually happen. Community actually forms.</div>
+      <div style="background:rgba(29,158,117,0.08);border-left:3px solid var(--teal-light);border-radius:0 8px 8px 0;padding:8px 11px;">
+        <div style="font-size:12px;font-weight:700;color:var(--teal-light);margin-bottom:2px;">Pledge reduces no-shows</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.45;">Public commitment = events actually happen.</div>
       </div>
     </div>
 
@@ -709,21 +842,21 @@ body { font-size: 15px; }
     <div style="flex:1;display:flex;gap:12px;align-items:center;justify-content:center;min-width:0;">
 
       <!-- PHONE: Event Feed -->
-      <div style="width:160px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:10px;border:2px solid rgba(75,159,255,0.25);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
+      <div style="width:230px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:12px;border:2px solid rgba(75,159,255,0.25);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
         <div style="width:40px;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;margin:0 auto 8px;"></div>
         <!-- Header -->
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <div style="font-size:11px;font-weight:800;color:#fff;">Community</div>
-          <div style="font-size:8px;background:rgba(75,159,255,0.15);border:1px solid rgba(75,159,255,0.3);border-radius:8px;padding:2px 7px;color:#4b9fff;">This week</div>
+          <div style="font-size:13px;font-weight:800;color:#fff;">Community</div>
+          <div style="font-size:9.5px;background:rgba(75,159,255,0.15);border:1px solid rgba(75,159,255,0.3);border-radius:8px;padding:3px 8px;color:#4b9fff;">This week</div>
         </div>
 
         <!-- Event 1: resident created -->
         <div style="background:rgba(75,159,255,0.07);border:1px solid rgba(75,159,255,0.2);border-radius:8px;padding:8px;margin-bottom:6px;">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
-            <div style="font-size:9px;font-weight:700;color:#fff;">📚 Study Session</div>
+            <div style="font-size:11px;font-weight:700;color:#fff;">📚 Study Session</div>
             <div style="font-size:7px;background:rgba(75,159,255,0.2);border-radius:6px;padding:2px 5px;color:#4b9fff;">Resident</div>
           </div>
-          <div style="font-size:7.5px;color:rgba(255,255,255,0.45);margin-bottom:4px;">Thu 7pm · 4F Study Lounge · Jordan</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.45);margin-bottom:4px;">Thu 7pm · 4F Study Lounge · Jordan</div>
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <div style="display:flex;gap:-3px;">
               <div style="width:16px;height:16px;border-radius:50%;background:#2352F5;border:1.5px solid #0d111e;font-size:7px;color:#fff;display:flex;align-items:center;justify-content:center;">J</div>
@@ -732,41 +865,41 @@ body { font-size: 15px; }
             </div>
             <div style="font-size:7px;color:rgba(93,202,165,0.8);">6 RSVPs</div>
           </div>
-          <div style="margin-top:4px;background:rgba(75,159,255,0.15);border-radius:6px;padding:4px;text-align:center;font-size:8px;font-weight:600;color:#4b9fff;">RSVP + pledge →</div>
+          <div style="margin-top:4px;background:rgba(75,159,255,0.15);border-radius:6px;padding:4px;text-align:center;font-size:10px;font-weight:600;color:#4b9fff;">RSVP + pledge →</div>
         </div>
 
         <!-- Event 2: operator seeded -->
         <div style="background:rgba(175,169,236,0.07);border:1px solid rgba(175,169,236,0.2);border-radius:8px;padding:8px;margin-bottom:6px;">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
-            <div style="font-size:9px;font-weight:700;color:#fff;">🎬 Rooftop Movie Night</div>
+            <div style="font-size:11px;font-weight:700;color:#fff;">🎬 Rooftop Movie Night</div>
             <div style="font-size:7px;background:rgba(175,169,236,0.2);border-radius:6px;padding:2px 5px;color:#afa9ec;">Operator</div>
           </div>
-          <div style="font-size:7.5px;color:rgba(255,255,255,0.45);margin-bottom:4px;">Sat 8pm · Rooftop · Management</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.45);margin-bottom:4px;">Sat 8pm · Rooftop · Management</div>
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <div style="font-size:7.5px;color:rgba(255,255,255,0.5);">22 going · 3 spots left</div>
             <div style="font-size:7px;color:var(--amber);">🔥 Popular</div>
           </div>
-          <div style="margin-top:4px;background:rgba(175,169,236,0.15);border-radius:6px;padding:4px;text-align:center;font-size:8px;font-weight:600;color:#afa9ec;">Reserve spot →</div>
+          <div style="margin-top:4px;background:rgba(175,169,236,0.15);border-radius:6px;padding:4px;text-align:center;font-size:10px;font-weight:600;color:#afa9ec;">Reserve spot →</div>
         </div>
 
         <!-- Event 3 -->
         <div style="background:rgba(29,158,117,0.07);border:1px solid rgba(29,158,117,0.2);border-radius:8px;padding:8px;">
-          <div style="font-size:9px;font-weight:700;color:#fff;margin-bottom:2px;">🎨 Sketchbook Share</div>
-          <div style="font-size:7.5px;color:rgba(255,255,255,0.45);margin-bottom:3px;">Sun 3pm · Lobby · Maya hosts</div>
+          <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">🎨 Sketchbook Share</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.45);margin-bottom:3px;">Sun 3pm · Lobby · Maya hosts</div>
           <div style="font-size:7px;color:rgba(93,202,165,0.7);">Creative vibes · 4 RSVPs</div>
         </div>
       </div>
 
       <!-- PHONE: Nudge notification -->
-      <div style="width:160px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:10px;border:2px solid rgba(239,159,39,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
+      <div style="width:230px;flex-shrink:0;background:#0d111e;border-radius:22px;padding:12px;border:2px solid rgba(239,159,39,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.5);">
         <div style="width:40px;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;margin:0 auto 8px;"></div>
         <!-- Status bar -->
-        <div style="font-size:11px;font-weight:800;color:#fff;margin-bottom:8px;">Home</div>
+        <div style="font-size:13px;font-weight:800;color:#fff;margin-bottom:8px;">Home</div>
 
         <!-- Quiet alert -->
         <div style="background:rgba(239,159,39,0.1);border:1px solid rgba(239,159,39,0.3);border-radius:8px;padding:8px;margin-bottom:6px;">
-          <div style="font-size:8px;font-weight:700;color:var(--amber);margin-bottom:3px;">⏰ 9 days quiet</div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.5);line-height:1.4;">Life got busy. We noticed. Jordan just posted a study group for Thursday.</div>
+          <div style="font-size:10px;font-weight:700;color:var(--amber);margin-bottom:3px;">⏰ 9 days quiet</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,0.5);line-height:1.45;">Life got busy. We noticed. Jordan just posted a study group for Thursday.</div>
         </div>
 
         <!-- Smart nudge card -->
@@ -774,63 +907,58 @@ body { font-size: 15px; }
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
             <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#2352F5,#7C3AED);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;">J</div>
             <div>
-              <div style="font-size:9px;font-weight:700;color:#fff;">Jordan's Study Group</div>
-              <div style="font-size:7.5px;color:rgba(255,255,255,0.4);">Thu 7pm · your match is hosting</div>
+              <div style="font-size:11px;font-weight:700;color:#fff;">Jordan's Study Group</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.4);">Thu 7pm · your match is hosting</div>
             </div>
           </div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.5);line-height:1.4;margin-bottom:6px;">"You're both free Thursday evenings. 5 others already going."</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,0.5);line-height:1.45;margin-bottom:6px;">"You're both free Thursday evenings. 5 others already going."</div>
           <div style="display:flex;gap:5px;">
-            <div style="flex:1;background:rgba(75,159,255,0.2);border:1px solid rgba(75,159,255,0.4);border-radius:6px;padding:5px;text-align:center;font-size:7.5px;font-weight:600;color:#4b9fff;">I'm in ✓</div>
-            <div style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:5px;text-align:center;font-size:7.5px;color:rgba(255,255,255,0.3);">Later</div>
+            <div style="flex:1;background:rgba(75,159,255,0.2);border:1px solid rgba(75,159,255,0.4);border-radius:6px;padding:5px;text-align:center;font-size:9px;font-weight:600;color:#4b9fff;">I'm in ✓</div>
+            <div style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:5px;text-align:center;font-size:9px;color:rgba(255,255,255,0.3);">Later</div>
           </div>
         </div>
 
         <!-- Vibe score -->
         <div style="background:rgba(29,158,117,0.08);border:1px solid rgba(29,158,117,0.2);border-radius:8px;padding:8px;margin-bottom:5px;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div style="font-size:8.5px;color:rgba(93,202,165,0.8);">Your Vibe Score</div>
-            <div style="font-size:14px;font-weight:800;color:#5dcaa5;">82</div>
+            <div style="font-size:10px;color:rgba(93,202,165,0.8);">Your Vibe Score</div>
+            <div style="font-size:17px;font-weight:800;color:#5dcaa5;">82</div>
           </div>
           <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:5px;overflow:hidden;">
             <div style="height:100%;width:82%;background:linear-gradient(90deg,#1d9e75,#5dcaa5);border-radius:2px;"></div>
           </div>
-          <div style="font-size:7px;color:rgba(255,255,255,0.3);margin-top:3px;">↑ +4 pts this week</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-top:3px;">↑ +4 pts this week</div>
         </div>
 
         <!-- Pledge count -->
         <div style="text-align:center;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:7px;padding:5px;">
-          <div style="font-size:7.5px;color:rgba(255,255,255,0.35);">3 active pledges · 12 connections made</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,0.35);">3 active pledges · 12 connections made</div>
         </div>
       </div>
 
     </div>
 
     <!-- RIGHT DESCRIPTOR -->
-    <div style="width:185px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+    <div style="width:165px;flex-shrink:0;display:flex;flex-direction:column;gap:7px;justify-content:center;">
       <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:2px;">OPERATOR IMPACT</div>
 
-      <div style="background:rgba(29,158,117,0.08);border:1px solid rgba(93,202,165,0.2);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--teal-light);margin-bottom:4px;">Events run themselves</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Resident-created events need zero staff time. You only touch the operator-seeded anchors — and even those are targeted automatically.</div>
+      <div style="background:rgba(29,158,117,0.08);border:1px solid rgba(93,202,165,0.2);border-radius:8px;padding:9px 11px;">
+        <div style="font-size:12px;font-weight:700;color:var(--teal-light);margin-bottom:3px;">Zero staff overhead</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.45;">Events run themselves. Nudges fire automatically. You touch only seeded anchors.</div>
       </div>
 
-      <div style="background:rgba(239,159,39,0.07);border:1px solid rgba(239,159,39,0.2);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--amber);margin-bottom:4px;">Nudge fires at day 9</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Not day 60 when you find out at lease renewal. Contextual and personal — not a blast email. Re-engagement before the decision is made.</div>
-      </div>
-
-      <div style="background:rgba(75,159,255,0.07);border:1px solid rgba(75,159,255,0.2);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--accent);margin-bottom:4px;">Every signal feeds the dashboard</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.5;">Every RSVP, every quiet stretch, every connection — visible to Alex Monday morning. Nothing is lost. Nothing is guessed.</div>
+      <div style="background:rgba(239,159,39,0.07);border:1px solid rgba(239,159,39,0.2);border-radius:8px;padding:9px 11px;">
+        <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:3px;">48-day head start</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.45;">Nudge at day 9. Churn signal before the renewal decision is made.</div>
       </div>
 
       <!-- Loop visual -->
-      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:11px;font-weight:700;color:var(--white);margin-bottom:6px;">The engagement loop</div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:9px 11px;">
+        <div style="font-size:10.5px;font-weight:700;color:var(--white);margin-bottom:5px;letter-spacing:1px;">THE ENGAGEMENT LOOP</div>
         <div style="display:flex;flex-direction:column;gap:2px;">
-          <div style="font-size:10.5px;color:rgba(93,202,165,0.8);">Match → Event → Pledge → Attend</div>
-          <div style="font-size:10.5px;color:rgba(75,159,255,0.7);">→ Vibe Score → Nudge → Re-engage</div>
-          <div style="font-size:10.5px;color:rgba(239,159,39,0.7);">→ Churn signal → Alex acts → Renewal</div>
+          <div style="font-size:10px;color:rgba(93,202,165,0.85);">Match → Event → Pledge</div>
+          <div style="font-size:10px;color:rgba(75,159,255,0.75);">→ Vibe Score → Nudge</div>
+          <div style="font-size:10px;color:rgba(239,159,39,0.75);">→ Churn signal → Renewal</div>
         </div>
       </div>
     </div>
@@ -904,8 +1032,8 @@ body { font-size: 15px; }
 
       <!-- No PMS strip -->
       <div style="background:linear-gradient(90deg,rgba(29,158,117,0.1),rgba(75,159,255,0.07));border:1px solid rgba(93,202,165,0.3);border-radius:8px;padding:6px 13px;margin-top:6px;display:flex;align-items:center;gap:12px;">
-        <div style="font-size:10px;font-weight:700;color:var(--teal-light);white-space:nowrap;">NO PMS INTEGRATION REQUIRED</div>
-        <div style="font-size:9px;color:var(--muted);">Runs alongside Yardi, Entrata, MRI, AppFolio — whatever you use. Zero setup. Zero IT ticket. Zero contract.</div>
+        <div style="font-size:10px;font-weight:700;color:var(--teal-light);white-space:nowrap;">PMS INTEGRATION AS NEEDED</div>
+        <div style="font-size:9px;color:var(--muted);">Runs alongside Yardi, Entrata, MRI, AppFolio — start standalone, integrate when ready.</div>
       </div>
 
       <!-- Trust & Safety note -->
@@ -953,8 +1081,8 @@ body { font-size: 15px; }
 <div class="slide" id="s6" style="background:#07091A;display:none;padding-top:12px!important;padding-bottom:10px!important;">
 
   <div class="part-badge badge-operator" style="margin-bottom:6px;">Getting Started · Operator Setup</div>
-  <div class="slide-title">Live in under 14 days.<br><span style="color:var(--teal-light);">Two steps. No IT required.</span></div>
-  <div class="slide-sub" style="margin-bottom:6px;">There's no PMS integration, no vendor approval process, and no IT ticket. Here's everything you need to go live.</div>
+  <div class="slide-title">Rapid onboarding.<br><span style="color:var(--teal-light);">Two steps. Pilot timeline scoped per operator.</span></div>
+  <div class="slide-sub" style="margin-bottom:6px;">Start as a fully standalone app — easiest to onboard, fastest to value. PMS integration and embedded operator dashboards available as a Phase 2 enhancement once value is proven.</div>
 
   <div style="display:flex;gap:16px;align-items:stretch;margin-top:6px;flex:1;">
 
@@ -995,29 +1123,16 @@ body { font-size: 15px; }
           </div>
         </div>
 
-        <!-- How to get it -->
-        <div style="background:rgba(75,159,255,0.06);border:1px solid rgba(75,159,255,0.18);border-radius:8px;padding:7px 10px;">
-          <div style="font-size:10.5px;font-weight:700;color:var(--accent);margin-bottom:4px;">How to export from your PMS</div>
-          <div style="display:flex;flex-direction:column;gap:4px;">
-            <div style="display:flex;gap:8px;align-items:flex-start;">
-              <div style="font-size:10.5px;color:rgba(175,169,236,0.8);flex-shrink:0;font-weight:600;">Yardi →</div>
-              <div style="font-size:10.5px;color:var(--muted);">Reports → Residents → Active Residents → Export CSV</div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:flex-start;">
-              <div style="font-size:10.5px;color:rgba(175,169,236,0.8);flex-shrink:0;font-weight:600;">Entrata →</div>
-              <div style="font-size:10.5px;color:var(--muted);">Reports → Leasing → Current Residents → Download</div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:flex-start;">
-              <div style="font-size:10.5px;color:rgba(175,169,236,0.8);flex-shrink:0;font-weight:600;">AppFolio →</div>
-              <div style="font-size:10.5px;color:var(--muted);">Reports → Tenant → Active Tenants → Export</div>
-            </div>
-          </div>
+        <!-- Simple how-to -->
+        <div style="background:rgba(75,159,255,0.06);border:1px solid rgba(75,159,255,0.18);border-radius:8px;padding:8px 11px;">
+          <div style="font-size:10.5px;font-weight:700;color:var(--accent);margin-bottom:3px;">Export from your PMS</div>
+          <div style="font-size:10.5px;color:var(--muted);line-height:1.5;">Standard CSV export. Works with Yardi, Entrata, AppFolio, MRI — whatever you use.</div>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:4px;">
           <div style="font-size:11px;color:var(--teal-light);">✓ Upload once to get started</div>
-          <div style="font-size:11px;color:var(--teal-light);">✓ Refresh monthly or when new residents move in</div>
-          <div style="font-size:11px;color:var(--muted);">No integration required — just a spreadsheet export</div>
+          <div style="font-size:11px;color:var(--teal-light);">✓ Submit move-in / move-out updates anytime — refreshed weekly during pilot</div>
+          <div style="font-size:11px;color:var(--muted);">Spreadsheet export to start · PMS integration as needed</div>
         </div>
       </div>
     </div>
@@ -1046,7 +1161,7 @@ body { font-size: 15px; }
             <div style="font-size:12.5px;font-weight:700;color:var(--teal-light);">New residents — QR card in move-in packet</div>
           </div>
           <div style="font-size:11px;color:var(--muted);line-height:1.6;">We ship property-coded QR cards to you. They go in every move-in packet. Resident scans on day one — highest motivation moment, highest opt-in rate.</div>
-          <div style="margin-top:6px;font-size:10.5px;color:rgba(93,202,165,0.7);font-weight:600;">QR cards ship free · Property code pre-configured</div>
+          <div style="margin-top:6px;font-size:10.5px;color:rgba(93,202,165,0.7);font-weight:600;">Property-coded QR cards · Print run cost included in pilot scope</div>
         </div>
 
         <!-- Channel 2: Existing residents -->
@@ -1079,22 +1194,19 @@ body { font-size: 15px; }
 
       <div style="background:rgba(29,158,117,0.08);border:1px solid rgba(93,202,165,0.2);border-radius:8px;padding:10px 12px;">
         <div style="font-size:11.5px;font-weight:700;color:var(--teal-light);margin-bottom:3px;">Churn signals with context</div>
-        <div style="font-size:10.5px;color:var(--muted);line-height:1.5;">Lease end dates from the roster + engagement signals from the app = a 48-day early warning that actually means something.</div>
+        <div style="font-size:10.5px;color:var(--muted);line-height:1.5;">Lease dates + engagement signals = 48-day early warning.</div>
       </div>
 
       <div style="background:rgba(75,159,255,0.07);border:1px solid rgba(75,159,255,0.18);border-radius:8px;padding:10px 12px;">
         <div style="font-size:11.5px;font-weight:700;color:var(--accent);margin-bottom:3px;">Full building coverage</div>
-        <div style="font-size:10.5px;color:var(--muted);line-height:1.5;">QR captures new move-ins. Operator invite captures residents already in the building. Together they get you to meaningful coverage from day one.</div>
+        <div style="font-size:10.5px;color:var(--muted);line-height:1.5;">QR cards capture new move-ins. Operator invites capture existing residents.</div>
       </div>
 
-      <div style="background:rgba(239,159,39,0.07);border:1px solid rgba(239,159,39,0.2);border-radius:8px;padding:10px 12px;">
-        <div style="font-size:11.5px;font-weight:700;color:var(--amber);margin-bottom:3px;">Refresh is lightweight</div>
-        <div style="font-size:10.5px;color:var(--muted);line-height:1.5;">Re-upload the roster monthly or when new residents arrive. Most operators export this in under 5 minutes from any PMS.</div>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center;">
-        <div style="font-size:12.5px;font-weight:700;color:var(--white);margin-bottom:2px;">No API.</div>
-        <div style="font-size:10.5px;color:var(--muted);">No integration. No IT ticket. Just a spreadsheet and a QR card.</div>
+      <!-- PHASE 2 ROADMAP — prominently labeled -->
+      <div style="background:rgba(175,169,236,0.1);border:1.5px solid rgba(175,169,236,0.4);border-radius:8px;padding:10px 12px;">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:1.5px;color:var(--purple);margin-bottom:4px;">PHASE 2 — ON ROADMAP</div>
+        <div style="font-size:11.5px;font-weight:700;color:var(--white);margin-bottom:3px;">PMS integration &amp; self-serve admin</div>
+        <div style="font-size:10.5px;color:var(--muted);line-height:1.5;">API integration with Yardi, Entrata, AppFolio · Embedded operator dashboards · Self-serve resident admin (add / remove / lease updates). Available post-pilot.</div>
       </div>
     </div>
 
@@ -1107,9 +1219,9 @@ body { font-size: 15px; }
 <div class="slide" id="s7" style="padding-top:12px;padding-bottom:8px;">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
     <div class="part-badge badge-operator" style="margin-bottom:0;">Operator Experience</div>
-    <div style="background:rgba(93,202,165,0.1);border:1px solid rgba(93,202,165,0.3);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--teal-light);">⚡ Pilot live in 14 days  ·  No PMS integration  ·  No IT ticket</div>
+    <div style="background:rgba(93,202,165,0.1);border:1px solid rgba(93,202,165,0.3);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--teal-light);">⚡ Rapid onboarding  ·  Pilot timeline scoped per operator  ·  Standalone or integrated</div>
   </div>
-  <div class="slide-title teal">Your week,<br><em style="color:var(--teal-light);">before and after Vivio Life.</em></div>
+  <div class="slide-title teal">Alex's week,<br><em style="color:var(--teal-light);">before and after Vivio Life.</em></div>
   <div class="content-row" style="align-items:flex-start;margin-top:10px;">
     <!-- Before -->
     <div style="flex:1;">
@@ -1162,7 +1274,6 @@ body { font-size: 15px; }
 
 
 </div>
-</div>
 
 <!-- ═══════════════════════════════════════════════════════════
      SLIDE 8 — CTA CLOSER
@@ -1174,7 +1285,7 @@ body { font-size: 15px; }
     <div style="text-align:center;margin-bottom:14px;">
       <div style="font-family:'DM Serif Display',serif;font-size:20px;letter-spacing:-0.5px;margin-bottom:8px;">vivio life<span style="color:var(--accent)">.</span> <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);font-weight:300;">community platform</span></div>
       <div style="font-family:'DM Serif Display',serif;font-size:clamp(20px,3vh,30px);line-height:1.2;margin-bottom:6px;">From a QR code at move-in<br>to a <em style="color:var(--teal-light);">community that renews.</em></div>
-      <div style="font-size:13.5px;color:var(--muted);font-weight:300;">Built exclusively for co-living and student housing operators. No IT setup. No new PMS. Zero lift from your team.</div>
+      <div style="font-size:13.5px;color:var(--muted);font-weight:300;">Built exclusively for co-living and student housing operators. Standalone-first — no IT setup to get started. Integration available when you're ready.</div>
       <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(175,169,236,0.08);border:1px solid rgba(175,169,236,0.22);border-radius:8px;padding:6px 14px;margin-top:8px;">
         <span style="font-size:13px;color:var(--purple);">◈</span>
         <span style="font-size:12px;color:var(--muted);font-weight:300;">Updater handles move-in. Pinata drives rewards. Yardi owns operations. <em style="color:rgba(255,255,255,0.7);">Nobody has built the social fabric of the building itself.</em> That's the white space Vivio Life was built for — and the one that drives renewals.</span>
@@ -1186,21 +1297,30 @@ body { font-size: 15px; }
 
       <!-- Operator gets -->
       <div class="card-teal" style="padding:14px 16px;">
-        <div class="card-label label-teal" style="margin-bottom:8px;">What you get</div>
-        <div style="display:flex;flex-direction:column;gap:5px;">
-          <div style="font-size:13px;color:var(--text);">📊 Community Engagement Score — live</div>
-          <div style="font-size:13px;color:var(--text);">⚠️ At-risk churn signals 48 days early</div>
+        <div class="card-label label-teal" style="margin-bottom:8px;">Why operators choose Vivio Life</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="font-size:13px;color:var(--text);">⚠️ Churn signals 48 days before notice</div>
+          <div style="font-size:13px;color:var(--text);">📊 Live Community Engagement Score</div>
           <div style="font-size:13px;color:var(--text);">🎯 Data-backed event targeting</div>
           <div style="font-size:13px;color:var(--text);">💬 Anonymous resident feedback</div>
-          <div style="font-size:13px;color:var(--text);">📈 Monthly community health report</div>
-          <div style="font-size:13px;color:var(--text);">✅ Pilots ship in days, not months
-              <div style="margin-top:6px;background:rgba(29,158,117,0.1);border:1px solid rgba(93,202,165,0.25);border-radius:6px;padding:6px 10px;font-size:9.5px;color:var(--teal-light);">No PMS integration · No new system · No IT involvement · Runs alongside whatever you already use</div></div>
+        </div>
+
+        <!-- Phase 2 Roadmap callout -->
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(93,202,165,0.2);">
+          <div style="font-size:9.5px;font-weight:700;letter-spacing:1.5px;color:var(--purple);margin-bottom:5px;">PHASE 2 — ON ROADMAP</div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            <div style="font-size:11.5px;color:var(--text);">→ PMS integration (Yardi · Entrata · AppFolio)</div>
+            <div style="font-size:11.5px;color:var(--text);">→ Embedded operator dashboards</div>
+            <div style="font-size:11.5px;color:var(--text);">→ Self-serve resident admin</div>
+            <div style="font-size:11.5px;color:var(--text);">→ SSO + RBAC for enterprise</div>
+          </div>
+          <div style="font-size:10.5px;color:rgba(175,169,236,0.7);margin-top:6px;font-style:italic;">Pilot first. Integrate when proven.</div>
         </div>
       </div>
 
-      <!-- Numbers -->
+      <!-- Time to Value -->
       <div class="card" style="padding:14px 16px;">
-        <div class="card-label label-blue" style="margin-bottom:8px;">The numbers</div>
+        <div class="card-label label-blue" style="margin-bottom:8px;">Time to Value</div>
         <div style="display:flex;flex-direction:column;gap:6px;">
           <div style="display:flex;align-items:center;gap:10px;">
             <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--teal-light);min-width:38px;">90s</div>
@@ -1215,8 +1335,8 @@ body { font-size: 15px; }
             <div style="font-size:13px;color:var(--muted);">head start on churn vs. traditional model</div>
           </div>
           <div style="display:flex;align-items:center;gap:10px;">
-            <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--purple);min-width:38px;">4.4×</div>
-            <div style="font-size:13px;color:var(--muted);">ROI on first 5 saved renewals (50-unit model)</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--purple);min-width:38px;line-height:1.1;">ROI</div>
+            <div style="font-size:13px;color:var(--muted);">measurable NOI lift in the first cohort of saved renewals</div>
           </div>
 
         </div>
@@ -1224,25 +1344,21 @@ body { font-size: 15px; }
 
       <!-- CTA -->
       <div style="background:linear-gradient(135deg,rgba(37,99,184,0.18),rgba(75,159,255,0.07));border:1px solid rgba(75,159,255,0.28);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
-        <div class="card-label label-blue" style="margin-bottom:2px;">Let's talk — 30 minutes</div>
+        <div class="card-label label-blue" style="margin-bottom:2px;">Let's start the conversation — 30 minutes</div>
         <div style="font-size:13px;color:var(--text);font-weight:300;line-height:1.6;">I'd like to understand your properties and residents — then show you exactly what Vivio Life would surface in your building.</div>
         <div style="font-size:12px;color:var(--muted);font-weight:300;line-height:1.55;margin-top:6px;padding-top:8px;border-top:1px solid var(--border);">Built by a founder with 25+ years in enterprise partnerships — Google, Microsoft, Apple, Boeing, T-Mobile. We know how operators buy, and we built accordingly.</div>
 
         <div style="display:flex;flex-direction:column;gap:7px;margin-top:2px;">
-
-          <div style="background:rgba(75,159,255,0.06);border:1px solid rgba(75,159,255,0.18);border-radius:8px;padding:8px 12px;margin-top:4px;">
-            <div style="font-size:12px;color:var(--muted);font-weight:300;line-height:1.55;">Not ready to book a call? <strong style="color:var(--accent);">Reply with your property count</strong> and we'll send a custom NOI impact estimate for your portfolio — no meeting required.</div>
-          </div>
-
-          <div style="display:flex;align-items:center;gap:9px;">
+          <div style="display:flex;align-items:center;gap:9px;margin-top:4px;">
             <div style="width:26px;height:26px;border-radius:7px;background:rgba(75,159,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">🌐</div>
             <div style="font-size:13px;color:var(--muted);">vivio.life</div>
           </div>
         </div>
 
         <div style="background:rgba(29,158,117,0.08);border:1px solid rgba(93,202,165,0.2);border-radius:8px;padding:9px 12px;margin-top:4px;">
-          <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-light);margin-bottom:3px;">Pilot availability — Summer 2026</div>
-          <div style="font-size:13px;color:var(--text);line-height:1.5;">QR cards ship free. Onboarding support included. No long-term commitment for the pilot.</div>
+          <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal-light);margin-bottom:3px;">Lighthouse Pilots — Summer 2026</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.5;">Hands-on onboarding included. Co-creation pricing for early partners. No long-term commitment.</div>
+          <div style="font-size:11.5px;color:var(--teal-light);line-height:1.5;margin-top:6px;padding-top:6px;border-top:1px solid rgba(93,202,165,0.18);font-weight:600;">⏱ Pilot availability: 90 days from contract signing</div>
         </div>
       </div>
     </div>
@@ -1261,7 +1377,7 @@ body { font-size: 15px; }
 <div id="nav">
   <button class="nav-btn" id="prev" onclick="go(-1)" disabled>&#8592;</button>
   <div class="nav-dots" id="dots"></div>
-  <span id="counter">1 / 7</span>
+  <span id="counter">1 / 10</span>
   <button class="nav-btn" id="next" onclick="go(1)">&#8594;</button>
 </div>
 
@@ -1278,7 +1394,7 @@ const nextBtn = document.getElementById('next');
 slides.forEach((s, i) => { if (i !== 0) s.style.display = 'none'; });
 
 // Dot color zones
-const zones = ['hook','hook','hook','hook','resident','resident','operator','operator','operator'];
+const zones = ['hook','hook','hook','hook','hook','resident','resident','operator','operator','operator'];
 slides.forEach((_, i) => {
   const d = document.createElement('div');
   d.className = 'dot ' + zones[i] + (i === 0 ? ' active' : '');
